@@ -1,46 +1,39 @@
 package com.ethanmao.klib
 
+import android.app.Activity
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.ethanmao.klib.ui.theme.KLibDemoTheme
+import android.util.Log
+import android.view.View
+import android.widget.Button
+import com.ethanmao.klib.thread.KExecutors
 
-class MainActivity : ComponentActivity() {
+class MainActivity : Activity(), View.OnClickListener {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            KLibDemoTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
-        }
+        setContentView(R.layout.activity_mian)
+        findViewById<Button>(R.id.bt_create).setOnClickListener(this)
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    KLibDemoTheme {
-        Greeting("Android")
+    override fun onClick(v: View?) {
+        test()
     }
+
+    private fun test() {
+        KExecutors.execute(1, Runnable {
+            Log.e("打印","测试")
+        })
+        KExecutors.execute(2, Runnable {
+            Log.e("打印","测试")
+        })
+        KExecutors.execute(3, Runnable {
+            Log.e("打印","测试")
+        })
+
+//        KExecutors.executeCallable(2, object :Callable{
+//
+//        })
+    }
+
+
 }
