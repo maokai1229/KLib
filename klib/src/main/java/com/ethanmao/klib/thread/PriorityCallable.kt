@@ -1,6 +1,6 @@
 package com.ethanmao.klib.thread
 
-class Callable<T> : Runnable {
+class PriorityCallable<T> : Runnable {
 
 
 
