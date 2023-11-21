@@ -20,19 +20,35 @@ class MainActivity : Activity(), View.OnClickListener {
     }
 
     private fun test() {
-        KExecutors.execute(1, Runnable {
-            Log.e("打印","测试")
-        })
         KExecutors.execute(2, Runnable {
             Log.e("打印","测试")
         })
+        KExecutors.execute(1, Runnable {
+            Log.e("打印","测试")
+        })
+//        KExecutors.pause()
         KExecutors.execute(3, Runnable {
             Log.e("打印","测试")
         })
-
+//        KExecutors.resume()
 //        KExecutors.executeCallable(2, object :Callable{
 //
 //        })
+
+        KExecutors.executeCallable(1, object : KExecutors.Callable <String>(){
+            override fun onBeforeRun() {
+
+            }
+
+            override fun onBackground(): String {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCompleted(t: String) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 
