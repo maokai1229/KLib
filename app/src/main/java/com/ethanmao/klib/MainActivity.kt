@@ -6,9 +6,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import com.ethanmao.klib.thread.KExecutors
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainActivity : Activity(), View.OnClickListener {
 
@@ -19,9 +16,6 @@ class MainActivity : Activity(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        GlobalScope.launch {
-            testCoroutine()
-        }
     }
 
     private fun test() {
@@ -54,7 +48,6 @@ class MainActivity : Activity(), View.OnClickListener {
 
    suspend  fun  testCoroutine(){
        Log.e("打印","测试 delay 前")
-       delay(2000)
        Log.e("打印","测试 delay后打印")
     }
 
