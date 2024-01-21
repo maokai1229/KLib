@@ -5,6 +5,7 @@ import android.util.SparseArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.ParameterizedType
 
@@ -117,7 +118,8 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
      * Bind Data
      */
     override fun onBindViewHolder(holder:RecyclerView.ViewHolder, position: Int) {
-
+        val dataItem = mDataItems.get(position)
+        dataItem.onBind(holder,position)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -130,4 +132,12 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+        // 获取 SpanCout
+        val layoutManager  = recyclerView.layoutManager
+        if (layoutManager is GridLayoutManager){
+
+        }
+    }
 }
