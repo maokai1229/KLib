@@ -36,6 +36,6 @@ abstract class DataItem<T,VH : RecyclerView.ViewHolder>(data: T) {
 
     // 占几列
     open fun  getSpanSize(): Int {
-        return 1
+        return 0
     }
 }

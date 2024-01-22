@@ -136,8 +136,20 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         super.onAttachedToRecyclerView(recyclerView)
         // 获取 SpanCout
         val layoutManager  = recyclerView.layoutManager
+        // 这里获取 SpanCout 的目的
         if (layoutManager is GridLayoutManager){
-
+            val spanCount = layoutManager.spanCount
+            // 动态设置网格布局的列数
+            layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+                override fun getSpanSize(position: Int): Int {
+                    if (position < mDataItems.size){
+                        val dataItem = mDataItems[position]
+                        val spanSize = dataItem.getSpanSize()
+                        return if (spanSize <= 0) spanCount else spanSize
+                    }
+                    return spanCount
+                }
+            }
         }
     }
 }
