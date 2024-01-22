@@ -152,4 +152,18 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
             }
         }
     }
+
+    fun  removeItem(dataItem: DataItem<*,*>) {
+        if (dataItem != null){
+            val index = mDataItems.indexOf(dataItem)
+            removeItem(index)
+        }
+    }
+
+    fun  refreshItem(dataItem: DataItem<*,*>) {
+        if (dataItem != null){
+            val index = mDataItems.indexOf(dataItem)
+            notifyItemChanged(index)
+        }
+    }
 }
