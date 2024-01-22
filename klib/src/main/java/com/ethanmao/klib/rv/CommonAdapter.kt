@@ -19,6 +19,11 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     private var mLayoutInflater: LayoutInflater? = null
     private var mContext: Context? = null
 
+    // HeadView
+
+    // FootView
+
+
     init {
         this.mContext = ctx
         this.mLayoutInflater = LayoutInflater.from(ctx)
@@ -132,6 +137,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
+    /**
+     * 这里的目的是,根据真实的 SpanCout 来动态设置
+     */
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         // 获取 SpanCout
