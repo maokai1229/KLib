@@ -86,9 +86,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         if (mHeadViews.indexOfKey(viewType) >= 0 ){
             val view = mHeadViews[viewType]
             return object : RecyclerView.ViewHolder(view) {}
-        }
-
-        if (mFootViews.indexOfKey(viewType) >= 0 ){
+        } else if (mFootViews.indexOfKey(viewType) >= 0 ){
             val view = mFootViews[viewType]
             return object : RecyclerView.ViewHolder(view) {}
         }
