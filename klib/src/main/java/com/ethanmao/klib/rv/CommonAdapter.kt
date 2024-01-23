@@ -83,6 +83,16 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (mHeadViews.indexOfKey(viewType) >= 0 ){
+            val view = mHeadViews[viewType]
+            return object : RecyclerView.ViewHolder(view) {}
+        }
+
+        if (mFootViews.indexOfKey(viewType) >= 0 ){
+            val view = mFootViews[viewType]
+            return object : RecyclerView.ViewHolder(view) {}
+        }
+
         val dataItem = mViewTypes[viewType]
         var view = dataItem.getItemView()
         if (view == null) {
@@ -139,7 +149,13 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
      * Bind Data
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val dataItem = mDataItems.get(position)
+        // 怎么处理头尾?
+        //1. 在这里判断头尾,不走,那怎么绑定数据,在 View 内部自己处理
+        if(isHeader(position) || isFooter(position))
+            return
+        // or 2. 走这里处理头尾
+        // 常规的  Item Bind
+        val dataItem = mDataItems.get(position - mHeadViews.size())
         dataItem.onBind(holder, position)
     }
 
@@ -152,16 +168,17 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
             return mFootViews.keyAt(position -(getRealItemCount() + mHeadViews.size()))
         }
         // 普通 ItemType
-        val dateItem = mDataItems[position]
-        val type = dateItem.javaClass.hashCode()
+        val dataItem = mDataItems[position]
+        val type = dataItem.javaClass.hashCode()
         if (mViewTypes.indexOfKey(type) < 0) {
-            mViewTypes.put(type, dateItem)
+            mViewTypes.put(type, dataItem)
         }
         return type
     }
 
 
     /**
+     * 适配GridLayoutManager
      * 这里的目的是,根据真实的 SpanCout 来动态设置
      */
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -183,6 +200,23 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
                 }
             }
         }
+
+    }
+
+
+    /**
+     *  TODO 适配 StaggeredGridLayoutManager
+     *  瀑布流布局
+     */
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        // 如果是瀑布流布局管理器,增加对应的处理
+
+    }
+
+    override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+
     }
 
     fun removeItem(dataItem: DataItem<*, *>) {
