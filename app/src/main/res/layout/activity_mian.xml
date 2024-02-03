@@ -10,6 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="测试"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/bt_rv_test"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CommonAdapter 测试"
         android:layout_gravity="center"
         />
 

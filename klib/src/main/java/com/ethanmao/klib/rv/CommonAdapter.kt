@@ -35,7 +35,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     /**
      * 添加单个数据
      */
-    fun addItem(index: Int, dataItem: DataItem<*, RecyclerView.ViewHolder>, notify: Boolean) {
+    fun addItem(index: Int, dataItem: DataItem<*, RecyclerView.ViewHolder>,  notify: Boolean) {
         if (index > 0) {
             mDataItems.add(index, dataItem)
         } else {
@@ -74,12 +74,12 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-    fun removeItem(item: DataItem<*, RecyclerView.ViewHolder>) {
-        if (item != null) {
-            val index = mDataItems.indexOf(item)
-            removeItem(index)
-        }
-    }
+//    fun removeItem(item: DataItem<*, RecyclerView.ViewHolder>) {
+//        if (item != null) {
+//            val index = mDataItems.indexOf(item)
+//            removeItem(index)
+//        }
+//    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -209,12 +209,10 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
         super.onViewAttachedToWindow(holder)
         // 如果是瀑布流布局管理器,增加对应的处理
-
     }
 
     override fun onViewDetachedFromWindow(holder: RecyclerView.ViewHolder) {
         super.onViewDetachedFromWindow(holder)
-
     }
 
     fun removeItem(dataItem: DataItem<*, *>) {

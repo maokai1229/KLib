@@ -1,6 +1,7 @@
 package com.ethanmao.klib
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,9 +14,15 @@ class MainActivity : Activity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mian)
         findViewById<Button>(R.id.bt_create).setOnClickListener(this)
+        findViewById<Button>(R.id.bt_rv_test).setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
+        when(v?.id){
+            R.id.bt_rv_test -> {
+                startActivity(Intent(this,RVTestActivity::class.java))
+            }
+        }
     }
 
     private fun test() {
