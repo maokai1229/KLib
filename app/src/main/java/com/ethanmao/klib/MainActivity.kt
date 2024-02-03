@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
+import com.ethanmao.klib.rv.RVTestActivity
 import com.ethanmao.klib.thread.KExecutors
 
 class MainActivity : Activity(), View.OnClickListener {
@@ -20,7 +21,7 @@ class MainActivity : Activity(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.bt_rv_test -> {
-                startActivity(Intent(this,RVTestActivity::class.java))
+                startActivity(Intent(this, RVTestActivity::class.java))
             }
         }
     }

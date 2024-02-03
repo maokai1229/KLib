@@ -60,6 +60,10 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    fun notifyAllDataItem() {
+        notifyDataSetChanged()
+    }
+
     /**
      * 移除单个
      */
