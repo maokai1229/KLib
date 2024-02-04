@@ -114,20 +114,27 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     ): RecyclerView.ViewHolder {
         // 父类的 Class
         val superClass = clazz.genericSuperclass
-        // 判断是不是泛型,由于是 ViewHolder 肯定是泛型
+        //  如果是泛型
         if (superClass is ParameterizedType) {
+            // 获取泛型参数列表
             val actualTypeArguments = superClass.actualTypeArguments
+            // 遍历
             for (actualTypeArgument in actualTypeArguments) {
                 // Class  判断是不是父类是不是 RecyclerView.ViewHolder
+                // 判断是不是泛型,且是 RecyclerView.ViewHolder
                 if (actualTypeArgument is Class<*>
-                    && RecyclerView.ViewHolder::class.java.isAssignableFrom(actualTypeArgument)
-                ) {
+                    && RecyclerView.ViewHolder::class.java.isAssignableFrom(actualTypeArgument)) {
                     // 是,则调用构造方法
-                    return actualTypeArgument.getConstructor()
-                        .newInstance() as RecyclerView.ViewHolder
+                    // 这里需要 try catch,可能会出现子类直接标记 Rv.ViewHolder ,抽象类不允许反射创建
+                    try {
+                        return actualTypeArgument.getConstructor().newInstance() as RecyclerView.ViewHolder
+                    }catch (e: Exception){
+                        e.printStackTrace()
+                    }
                 }
             }
         }
+        // 不是泛型,直接自行创建
         return object : RecyclerView.ViewHolder(view!!) {}
     }
 

@@ -14,8 +14,5 @@ class SimpleDataItem @JvmOverloads constructor(val content : String) : DataItem<
     override fun onBind(holder: ViewHolder, position: Int) {
         val tvContent = holder.itemView.findViewById<TextView>(R.id.tv_content)
         tvContent.text = content
-//        holder.itemView.tv_simple.text = content
     }
-
-
 }

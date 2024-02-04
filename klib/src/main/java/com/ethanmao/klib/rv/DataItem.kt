@@ -18,7 +18,7 @@ abstract class DataItem<T,VH : RecyclerView.ViewHolder>(data: T) {
     }
 
     // 绑定数据
-    abstract fun onBind(holder: RecyclerView.ViewHolder, position: Int)
+    abstract fun onBind(viewHolder: VH, position: Int)
 
     // 刷新列表
     open fun refreshItem(){
