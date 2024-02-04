@@ -9,6 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.reflect.ParameterizedType
 
+/**
+ * 通用的 Rv 适配器
+ * 支持添加 HeaderView,FooterView
+ *
+ */
 class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     // DataItem 数据
@@ -19,13 +24,12 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     private var mLayoutInflater: LayoutInflater? = null
     private var mContext: Context? = null
 
-    // HeadView
-    private var mHeadViews: SparseArray<View> = SparseArray()
+    // HeadView,FootView
     private var HEADER_BASE = 10000
-    // FootView
-    private var mFootViews: SparseArray<View> = SparseArray()
     private var FOOTER_BASE = 20000
 
+    private var mHeadViews: SparseArray<View> = SparseArray()
+    private var mFootViews: SparseArray<View> = SparseArray()
 
     init {
         this.mContext = ctx
@@ -35,7 +39,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     /**
      * 添加单个数据
      */
-    fun addItem(index: Int, dataItem: DataItem<*, RecyclerView.ViewHolder>,  notify: Boolean) {
+    fun addItem(index: Int, dataItem: DataItem<*, RecyclerView.ViewHolder>, notify: Boolean) {
         if (index > 0) {
             mDataItems.add(index, dataItem)
         } else {
@@ -87,10 +91,10 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (mHeadViews.indexOfKey(viewType) >= 0 ){
+        if (mHeadViews.indexOfKey(viewType) >= 0) {
             val view = mHeadViews[viewType]
             return object : RecyclerView.ViewHolder(view) {}
-        } else if (mFootViews.indexOfKey(viewType) >= 0 ){
+        } else if (mFootViews.indexOfKey(viewType) >= 0) {
             val view = mFootViews[viewType]
             return object : RecyclerView.ViewHolder(view) {}
         }
@@ -123,12 +127,14 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
                 // Class  判断是不是父类是不是 RecyclerView.ViewHolder
                 // 判断是不是泛型,且是 RecyclerView.ViewHolder
                 if (actualTypeArgument is Class<*>
-                    && RecyclerView.ViewHolder::class.java.isAssignableFrom(actualTypeArgument)) {
+                    && RecyclerView.ViewHolder::class.java.isAssignableFrom(actualTypeArgument)
+                ) {
                     // 是,则调用构造方法
                     // 这里需要 try catch,可能会出现子类直接标记 Rv.ViewHolder ,抽象类不允许反射创建
                     try {
-                        return actualTypeArgument.getConstructor().newInstance() as RecyclerView.ViewHolder
-                    }catch (e: Exception){
+                        return actualTypeArgument.getConstructor()
+                            .newInstance() as RecyclerView.ViewHolder
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                 }
@@ -160,7 +166,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // 怎么处理头尾?
         //1. 在这里判断头尾,不走,那怎么绑定数据,在 View 内部自己处理
-        if(isHeader(position) || isFooter(position))
+        if (isHeader(position) || isFooter(position))
             return
         // or 2. 走这里处理头尾
         // 常规的  Item Bind
@@ -170,11 +176,11 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
 
     override fun getItemViewType(position: Int): Int {
         // 相应的也要增加头尾的判断
-        if(isHeader(position)){
+        if (isHeader(position)) {
             return mHeadViews.keyAt(position)
         }
-        if (isFooter(position)){
-            return mFootViews.keyAt(position -(getRealItemCount() + mHeadViews.size()))
+        if (isFooter(position)) {
+            return mFootViews.keyAt(position - (getRealItemCount() + mHeadViews.size()))
         }
         // 普通 ItemType
         val dataItem = mDataItems[position]
@@ -275,7 +281,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         // 尾部的位置怎么确定
         if (mFootViews.indexOfValue(view) < 0) {
             mFootViews.put(FOOTER_BASE++, view)
-            notifyItemInserted(itemCount-1)
+            notifyItemInserted(itemCount - 1)
         }
     }
 
@@ -283,7 +289,7 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         val index = mFootViews.indexOfValue(view)
         if (index >= 0) {
             mFootViews.removeAt(index)
-            notifyItemRemoved(mHeadViews.size() + mDataItems.size + index -1)
+            notifyItemRemoved(mHeadViews.size() + mDataItems.size + index - 1)
         }
     }
 }
