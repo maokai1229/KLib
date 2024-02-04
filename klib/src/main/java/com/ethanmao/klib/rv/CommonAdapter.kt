@@ -82,14 +82,6 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
 
-//    fun removeItem(item: DataItem<*, RecyclerView.ViewHolder>) {
-//        if (item != null) {
-//            val index = mDataItems.indexOf(item)
-//            removeItem(index)
-//        }
-//    }
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         if (mHeadViews.indexOfKey(viewType) >= 0) {
             val view = mHeadViews[viewType]
@@ -183,7 +175,8 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
             return mFootViews.keyAt(position - (getRealItemCount() + mHeadViews.size()))
         }
         // 普通 ItemType
-        val dataItem = mDataItems[position]
+
+        val dataItem = mDataItems[position - mHeadViews.size()]
         val type = dataItem.javaClass.hashCode()
         if (mViewTypes.indexOfKey(type) < 0) {
             mViewTypes.put(type, dataItem)
