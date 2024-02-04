@@ -253,7 +253,6 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     fun addHeadView(view: View) {
-        //TODO 如果添加过,是先移除旧的,换成新的? 还是有就不再添加,这里根据场景来
         // 先定成有就不重复添加
         if (mHeadViews.indexOfValue(view) < 0) {
             mHeadViews.put(HEADER_BASE++, view)

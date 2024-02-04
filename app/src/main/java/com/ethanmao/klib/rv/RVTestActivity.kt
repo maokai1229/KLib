@@ -12,6 +12,8 @@ import com.ethanmao.klib.rv.CommonAdapter
 class RVTestActivity : Activity() {
 
     lateinit  var  binding : ActivityRvTestBinding
+    lateinit  var headView : TextView
+    lateinit  var footView : TextView
     // Fragement
     //     binding = FragmentMineBinding.inflate(inflater,container,false);
 
@@ -36,18 +38,26 @@ class RVTestActivity : Activity() {
         binding.rvList.postDelayed({
             tesFooter(adapter)
         },4000)
+
+        binding.rvList.postDelayed({
+            adapter.removeFootView(footView)
+        },6000)
+
+        binding.rvList.postDelayed({
+            adapter.removeHeadView(headView)
+        },8000)
     }
 
     private fun testHeader(adapter: CommonAdapter) {
-        val headView = TextView(this)
+        headView = TextView(this)
         headView.text = "Header"
         adapter.addHeadView(headView)
     }
 
     private fun tesFooter(adapter: CommonAdapter) {
-        val headView = TextView(this)
-        headView.text = "Footer"
-        adapter.addFootView(headView)
+        footView= TextView(this)
+        footView.text = "Footer"
+        adapter.addFootView(footView)
     }
 
     private fun testAdapter(adapter: CommonAdapter) {
