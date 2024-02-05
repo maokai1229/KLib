@@ -44,7 +44,7 @@ class RVTestActivity : Activity() {
         },6000)
 
         binding.rvList.postDelayed({
-            adapter.removeHeadView(headView)
+            adapter.removeAllHeadView()
         },8000)
     }
 

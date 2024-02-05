@@ -281,7 +281,24 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         val index = mFootViews.indexOfValue(view)
         if (index >= 0) {
             mFootViews.removeAt(index)
-            notifyItemRemoved(mHeadViews.size() + mDataItems.size + index - 1)
+            notifyItemRemoved(mHeadViews.size() + mDataItems.size + index)
         }
     }
+
+    fun removeAllHeadView() {
+        if (mHeadViews.size() > 0) {
+            val headSize =  mHeadViews.size()
+            mHeadViews.clear()
+            notifyItemRangeRemoved(0,headSize)
+        }
+    }
+
+    fun removeAllFootView() {
+        if (mFootViews.size() > 0) {
+            mFootViews.clear()
+            // head 数量 , Foot 数量
+            notifyItemRangeRemoved(mHeadViews.size() + mDataItems.size , itemCount - 1)
+        }
+    }
+
 }
