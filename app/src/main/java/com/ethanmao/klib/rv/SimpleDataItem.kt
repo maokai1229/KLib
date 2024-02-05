@@ -4,8 +4,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.ethanmao.klib.R
 
-class SimpleDataItem @JvmOverloads constructor(val content: String) :
-    DataItem<String, ViewHolder>(content) {
+class SimpleDataItem @JvmOverloads constructor(val content: String) : DataItem<String, ViewHolder>(content) {
 
 
     override fun getLayoutId(): Int {

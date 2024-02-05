@@ -252,6 +252,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         return position > mHeadViews.size() + mDataItems.size - 1
     }
 
+    /**
+     * 添加 Header
+     */
     fun addHeadView(view: View) {
         // 先定成有就不重复添加
         if (mHeadViews.indexOfValue(view) < 0) {
@@ -260,6 +263,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * 移除 Header
+     */
     fun removeHeadView(view: View) {
         // 存在,才 remove
         val index = mHeadViews.indexOfValue(view)
@@ -269,6 +275,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * 添加 Footer
+     */
     fun addFootView(view: View) {
         // 尾部的位置怎么确定
         if (mFootViews.indexOfValue(view) < 0) {
@@ -277,6 +286,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * 移除指定的 Footer
+     */
     fun removeFootView(view: View) {
         val index = mFootViews.indexOfValue(view)
         if (index >= 0) {
@@ -285,6 +297,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     *  移除所有 Header
+     */
     fun removeAllHeadView() {
         if (mHeadViews.size() > 0) {
             val headSize =  mHeadViews.size()
@@ -293,6 +308,9 @@ class CommonAdapter(ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder
         }
     }
 
+    /**
+     * 移除所有 Footer
+     */
     fun removeAllFootView() {
         if (mFootViews.size() > 0) {
             mFootViews.clear()

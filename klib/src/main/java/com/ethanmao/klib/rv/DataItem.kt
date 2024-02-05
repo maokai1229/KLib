@@ -3,6 +3,12 @@ package com.ethanmao.klib.rv
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ *  Item  的抽象
+ *  提供了一些基本的方法:
+ *  1. refreshItem 刷新自身
+ *  2. removeItem 删除自身
+ */
 abstract class DataItem<T, VH : RecyclerView.ViewHolder>(data: T) {
 
     var mData: T? = null
