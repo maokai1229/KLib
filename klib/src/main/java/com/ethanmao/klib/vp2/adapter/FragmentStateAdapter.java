@@ -21,6 +21,7 @@ import static androidx.lifecycle.Lifecycle.State.RESUMED;
 import static androidx.lifecycle.Lifecycle.State.STARTED;
 import static androidx.recyclerview.widget.RecyclerView.NO_ID;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -124,6 +125,7 @@ public abstract class FragmentStateAdapter extends
         super.setHasStableIds(true);
     }
 
+    @SuppressLint("RestrictedApi")
     @CallSuper
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
