@@ -19,6 +19,7 @@ class MainActivity : Activity(), View.OnClickListener {
         StatusBarHelper.setUp(this,Color.WHITE,true,true)
         findViewById<Button>(R.id.bt_create).setOnClickListener(this)
         findViewById<Button>(R.id.bt_rv_test).setOnClickListener(this)
+        StatusBarHelper.with(findViewById(R.id.ll_container))
     }
 
     override fun onClick(v: View?) {

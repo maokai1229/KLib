@@ -1,17 +1,25 @@
 package com.ethanmao.klib.utils
 
 import android.app.Activity
+import android.content.Context
+import android.graphics.Color
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.FrameLayout
+import com.ethanmao.klib.R
+
 
 /**
  *  沉浸式工具类
  */
 object StatusBarHelper {
+    val STATUS_BAR_VIEW = R.id.status_bar_view
 
     fun setUp(activity: Activity, statusColor: Int, darkMode: Boolean, isFullScreen : Boolean = false) {
         val window = activity.window
-        val decorView = window.decorView
+        val decorView = window.decorView as ViewGroup
         // Window 的 Flag,不同于 View
         var windowVisibility = decorView.systemUiVisibility
 
@@ -38,9 +46,23 @@ object StatusBarHelper {
             // 全屏,并且使得时间,电量等可见
             windowVisibility = windowVisibility or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
         }
-
         decorView.systemUiVisibility = windowVisibility
     }
 
+    /**
+     * 处理布局和状态栏重叠
+     */
+    fun with(view : View){
+        view.setPadding(0, getStatusBarHeight(view.context), 0, 0)
+    }
+
+    fun getStatusBarHeight(ctx : Context) : Int {
+        var statusBarHeight = 0
+        val resourceId: Int = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android")
+        if (resourceId > 0) {
+            statusBarHeight = ctx.getResources().getDimensionPixelSize(resourceId)
+        }
+        return statusBarHeight
+    }
 
 }
