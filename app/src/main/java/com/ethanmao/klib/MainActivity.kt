@@ -2,18 +2,21 @@ package com.ethanmao.klib
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import com.ethanmao.klib.rv.RVTestActivity
 import com.ethanmao.klib.thread.KExecutors
+import com.ethanmao.klib.utils.StatusBarHelper
 
 class MainActivity : Activity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mian)
+        StatusBarHelper.setUp(this,Color.WHITE,true,true)
         findViewById<Button>(R.id.bt_create).setOnClickListener(this)
         findViewById<Button>(R.id.bt_rv_test).setOnClickListener(this)
     }

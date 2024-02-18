@@ -31,21 +31,6 @@ class RVTestActivity : Activity() {
         binding.rvList.adapter = adapter
         testAdapter(adapter)
 
-        binding.rvList.postDelayed({
-            testHeader(adapter)
-        },2000)
-
-        binding.rvList.postDelayed({
-            tesFooter(adapter)
-        },4000)
-
-        binding.rvList.postDelayed({
-            adapter.removeFootView(footView)
-        },6000)
-
-        binding.rvList.postDelayed({
-            adapter.removeAllHeadView()
-        },8000)
     }
 
     private fun testHeader(adapter: CommonAdapter) {
@@ -65,6 +50,23 @@ class RVTestActivity : Activity() {
             adapter.addItem(i,SimpleDataItem(i.toString()),false)
         }
         adapter.notifyAllDataItem()
+
+        binding.rvList.postDelayed({
+            testHeader(adapter)
+        },2000)
+
+        binding.rvList.postDelayed({
+            tesFooter(adapter)
+        },4000)
+
+        binding.rvList.postDelayed({
+            adapter.removeFootView(footView)
+        },6000)
+
+        binding.rvList.postDelayed({
+            adapter.removeAllHeadView()
+        },8000)
+
     }
 
 

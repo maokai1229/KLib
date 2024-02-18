@@ -62,7 +62,7 @@ import com.ethanmao.klib.vp2.adapter.StatefulAdapter;
 import java.lang.annotation.Retention;
 
 /**
- * 基于 viewpager2 1.0.0 版本源码
+ * viewpager2 1.0.0 版本源码
  * ViewPager2 replaces {ViewPager}, addressing most of its
  * predecessor’s pain-points, including right-to-left layout support, vertical orientation,
  * modifiable Fragment collections, etc.

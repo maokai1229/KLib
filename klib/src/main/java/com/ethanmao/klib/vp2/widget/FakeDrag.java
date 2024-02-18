@@ -17,7 +17,6 @@ package com.ethanmao.klib.vp2.widget;
 
 
 import static com.ethanmao.klib.vp2.widget.ViewPager2Ex.ORIENTATION_HORIZONTAL;
-
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
