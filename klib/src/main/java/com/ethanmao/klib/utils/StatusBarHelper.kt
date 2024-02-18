@@ -52,7 +52,8 @@ object StatusBarHelper {
      * 处理布局和状态栏重叠
      */
     fun with(view : View){
-        view.setPadding(0, getStatusBarHeight(view.context), 0, 0)
+        val paddingTop = getStatusBarHeight(view.context) + view.paddingTop
+        view.setPadding(0, paddingTop, 0, 0)
     }
 
     fun getStatusBarHeight(ctx : Context) : Int {
