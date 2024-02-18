@@ -15,7 +15,6 @@ import com.ethanmao.klib.R
  *  沉浸式工具类
  */
 object StatusBarHelper {
-    val STATUS_BAR_VIEW = R.id.status_bar_view
 
     fun setUp(activity: Activity, statusColor: Int, darkMode: Boolean, isFullScreen : Boolean = false) {
         val window = activity.window
